@@ -133,6 +133,8 @@ payButton.style.width = '110%';
 payButton.style.padding = '0.75rem 0';
 payButton.style.margin = '1.5rem 0 1rem';
 payButton.style.color = 'white';
+payButton.setAttribute('href', '#');
+payButton.style.textDecoration = 'none';;
 payButton.style.backgroundColor = BrightBlue;
 payButton.style.borderRadius = '7px';
 payButton.style.boxShadow = 
@@ -145,6 +147,8 @@ const cancelButton = document.createElement('a');
 secondSection.append(cancelButton);
 cancelButton.style.color = DesaturatedBlue;
 cancelButton.style.fontWeight = 700;
+cancelButton.setAttribute('href', '#');
+cancelButton.style.textDecoration = 'none';
 cancelButton.innerText = 'Cancel Order';
 
 // DESKTOP RESOLUTION
