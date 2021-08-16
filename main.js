@@ -172,7 +172,7 @@ function mediaQuerie() {
         h1.style.fontSize = '1.7rem';
         body.style.backgroundImage = 'url(./images/pattern-background-desktop.svg)';
         body.style.backgroundRepeat = 'no-repeat';
-        body.style.backgroundPositionY = '-70px';
+        body.style.backgroundPositionY = '-70px'; //fullscreen value: 0
     }
 }
 
