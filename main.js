@@ -1,9 +1,3 @@
-/* TODO: 
-- Apply button animation
-- Add responsiveness to the main container's components
-- Add background images 
-- Add media queries */
-
 // VARIABLES
 const BrightBlue = 'hsl(245, 75%, 52%)';
 const DarkBlue = 'hsl(223, 47%, 23%)';
@@ -31,6 +25,8 @@ body.style.alignItems = 'center';
 body.style.justifyContent = 'center'; 
 body.style.backgroundColor = PaleBlue;
 body.style.height = '120vh';
+body.style.backgroundImage = 'url(./images/pattern-background-mobile.svg)';
+body.style.backgroundRepeat = 'no-repeat';
 
 //  BODY\MAIN CONTAINER
 const mainContainer = document.createElement('main');
@@ -39,7 +35,7 @@ mainContainer.style.display = 'flex';
 mainContainer.style.flexDirection = 'column';
 mainContainer.style.alignItems = 'center';
 mainContainer.style.width = '90%';
-mainContainer.style.maxWidth = '400px';
+mainContainer.style.maxWidth = '425px';
 mainContainer.style.borderRadius = '10px';
 mainContainer.style.boxShadow = '0 1px 10px -3px black';
 mainContainer.style.backgroundColor = VeryPaleBlue;
@@ -86,10 +82,11 @@ p.innerText =
 // SECOND SECTION\PLAN CONTAINER
 const planContainer = document.createElement('article');
 secondSection.append(planContainer);
-planContainer.style.width = '100%';
+planContainer.style.width = '95%';
+planContainer.style.minWidth = '250px';
+planContainer.style.maxWidth = '300px';
 planContainer.style.display = 'flex';
 planContainer.style.alignItems = 'center';
-planContainer.style.columnGap = '20px';
 
 // PLAN CONTAINER\ICON
 const icon = document.createElement('img');
@@ -97,6 +94,7 @@ planContainer.append(icon);
 icon.src = './images/icon-music.svg'
 icon.alt = 'music icon';
 icon.style.height = 'fit-content';
+icon.style.justifySelf = 'left';
 
 // PLAN CONTAINER\PLAN TEXT
 const planText = document.createElement('p');
@@ -105,7 +103,7 @@ planText.innerText = 'Annual Plan';
 planText.style.display = 'flex';
 planText.style.flexDirection = 'column';
 planText.style.alignItems = 'center';
-planText.style.justifyContent = 'center';
+planText.style.paddingLeft = '20px';
 planText.style.fontWeight = 900;
 planText.style.color = DarkBlue;
 
@@ -115,32 +113,46 @@ planText.append(planPrice);
 planPrice.style.color = DesaturatedBlue;
 planPrice.style.fontWeight = 500;
 planPrice.innerText = '$59.99/year';
-planPrice.style.margin = '0';
+planPrice.style.margin = '5px 0 0';
 
-// PLAN CONTAINER\ CHANGE BUTTON
+// PLAN CONTAINER\CHANGE BUTTON
 const changeButton = document.createElement('a');
 planContainer.append(changeButton)
 changeButton.setAttribute('href', '#');
 changeButton.innerText = 'change';
-changeButton.style.paddingLeft = '25px';
 changeButton.style.color = BrightBlue;
+changeButton.style.marginLeft = 'auto';
 changeButton.style.fontWeight = 700;
 
 // SECOND SECTION\PAYMENT BUTTON
 const payButton = document.createElement('a');
 secondSection.append(payButton);
 payButton.style.width = '110%';
+payButton.style.maxWidth = '340px';
 payButton.style.padding = '0.75rem 0';
-payButton.style.margin = '1.5rem 0 1rem';
+payButton.style.margin = '2rem 0 1.5rem';
 payButton.style.color = 'white';
 payButton.setAttribute('href', '#');
 payButton.style.textDecoration = 'none';;
 payButton.style.backgroundColor = BrightBlue;
-payButton.style.borderRadius = '7px';
+payButton.style.borderRadius = '10px';
 payButton.style.boxShadow = 
 '0 20px 5px -3px hsl(225, 100%, 94%)';
 payButton.style.fontWeight = 700;
 payButton.innerText = 'Proceed to Payment';
+payButton.style.transition = 'transform 0.5s, box-shadow 0.5s';
+// translates the button and reduces the shadow's size
+payButton.onmouseover = () => {
+    payButton.style.transform = 'translateY(-10px)';
+    payButton.style.boxShadow = 
+'0 15px 5px -3px hsl(225, 100%, 94%)';
+}
+// returns to the default state
+payButton.onmouseleave = () => {
+    payButton.style.transform = 'translateY(0px)';
+    payButton.style.boxShadow = 
+    '0 20px 5px -3px hsl(225, 100%, 94%)';
+}
 
 // SECOND SECTION\CANCEL BUTTON
 const cancelButton = document.createElement('a');
@@ -153,4 +165,16 @@ cancelButton.innerText = 'Cancel Order';
 
 // DESKTOP RESOLUTION
 
-// BACKGROUND IMAGES
+const desktopRes = window.matchMedia('(min-width: 768px)');
+
+function mediaQuerie() {
+    if (desktopRes.matches) {
+        h1.style.fontSize = '1.7rem';
+        body.style.backgroundImage = 'url(./images/pattern-background-desktop.svg)';
+        body.style.backgroundRepeat = 'no-repeat';
+        body.style.backgroundPositionY = '-70px';
+    }
+}
+
+mediaQuerie(desktopRes);
+desktopRes.addEventListener(mediaQuerie);
