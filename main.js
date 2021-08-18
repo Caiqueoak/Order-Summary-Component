@@ -1,8 +1,3 @@
-/* TODO:
-- MAKE THE BACKGROUND IMAGES RESPONSIVE WITH CALC
-- USE EVENT LISTENERS MORE EFFICIENTLY
-*/
-
 // VARIABLES
 const BrightBlue = 'hsl(245, 75%, 52%)';
 const DarkBlue = 'hsl(223, 47%, 23%)';
@@ -129,6 +124,12 @@ changeButton.innerText = 'change';
 changeButton.style.color = BrightBlue;
 changeButton.style.marginLeft = 'auto';
 changeButton.style.fontWeight = 700;
+changeButton.onmouseover = () => {
+    changeButton.style.color = DarkBlue;
+}
+changeButton.onmouseleave = () => {
+    changeButton.style.color = BrightBlue;
+}
 
 // SECOND SECTION\PAYMENT BUTTON
 const payButton = document.createElement('a');
@@ -146,7 +147,8 @@ payButton.style.boxShadow =
 '0 20px 5px -3px hsl(225, 100%, 94%)';
 payButton.style.fontWeight = 700;
 payButton.innerText = 'Proceed to Payment';
-payButton.style.transition = 'transform 0.5s, box-shadow 0.5s';
+payButton.style.transition = 
+'transform 0.5s, box-shadow 0.5s, width 0.5s';
 // translates the button and reduces the shadow's size
 payButton.onmouseover = () => {
     payButton.style.transform = 'translateY(-5px)';
@@ -158,6 +160,14 @@ payButton.onmouseleave = () => {
     payButton.style.transform = 'translateY(0px)';
     payButton.style.boxShadow = 
     '0 20px 5px -3px hsl(225, 100%, 94%)';
+}
+payButton.onmousedown = () => {
+    payButton.style.width = '90%';
+    payButton.style.boxShadow = '0 13px 5px -3px hsl(225, 100%, 94%)';
+}
+payButton.onmouseup = () => {
+    payButton.style.width = '110%';
+    payButton.style.boxShadow = '0 20px 5px -3px hsl(225, 100%, 94%)';
 }
 
 // SECOND SECTION\CANCEL BUTTON
@@ -181,7 +191,7 @@ cancelButton.addEventListener('mouseout', () => {
 
 // FOOTER
 const footer = document.querySelector('footer');
-footer.style.position = 'absolute'; 
+footer.style.position = 'relative'; 
 footer.style.textAlign = 'center'; 
 
 // Media Queries
@@ -192,15 +202,13 @@ function mediaQuerie(resolution) {
         h1.style.fontSize = '1.7rem';
         footer.style.bottom = '-25px'; 
         body.style.backgroundImage = 'url(./images/pattern-background-desktop.svg)';
-        body.style.backgroundPositionY = '-70px';
         body.style.height = '120vh' //fullscreen value: 0
     }
     // MOBILE RESOLUTION
     else {
         h1.style.fontSize = '1.45rem';
-        footer.style.bottom = '5px'; 
+        footer.style.bottom = '-25px'; 
         body.style.backgroundImage = 'url(./images/pattern-background-mobile.svg)';
-        body.style.backgroundPositionY= '0px';
         body.style.height = '140vh'; 
     }
 }
