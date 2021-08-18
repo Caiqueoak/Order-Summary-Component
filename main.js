@@ -1,3 +1,8 @@
+/* TODO:
+- MAKE THE BACKGROUND IMAGES RESPONSIVE WITH CALC
+- USE EVENT LISTENERS MORE EFFICIENTLY
+*/
+
 // VARIABLES
 const BrightBlue = 'hsl(245, 75%, 52%)';
 const DarkBlue = 'hsl(223, 47%, 23%)';
@@ -20,13 +25,13 @@ for (let i = 0; i < allElements.length; i++) {
 
 // BODY
 const body = document.body;
+body.style.position = 'relative';
 body.style.display = 'flex';
+body.style.flexDirection = 'column-reverse';
 body.style.alignItems = 'center'; 
 body.style.justifyContent = 'center'; 
-body.style.backgroundColor = PaleBlue;
-body.style.height = '120vh';
-body.style.backgroundImage = 'url(./images/pattern-background-mobile.svg)';
 body.style.backgroundRepeat = 'no-repeat';
+body.style.backgroundColor = PaleBlue;
 
 //  BODY\MAIN CONTAINER
 const mainContainer = document.createElement('main');
@@ -75,6 +80,7 @@ h1.innerText = 'Order Summary';
 const p = document.createElement('p');
 secondSection.append(p);
 p.style.margin = '0 0 30px';
+p.style.lineHeight = '1.5rem';
 p.style.color = DesaturatedBlue;
 p.innerText = 
 'You can now listen to millions of songs, audiobooks, and podcasts on any device anywhere you like!';
@@ -143,9 +149,9 @@ payButton.innerText = 'Proceed to Payment';
 payButton.style.transition = 'transform 0.5s, box-shadow 0.5s';
 // translates the button and reduces the shadow's size
 payButton.onmouseover = () => {
-    payButton.style.transform = 'translateY(-10px)';
+    payButton.style.transform = 'translateY(-5px)';
     payButton.style.boxShadow = 
-'0 15px 5px -3px hsl(225, 100%, 94%)';
+'0 16px 5px -3px hsl(225, 100%, 94%)';
 }
 // returns to the default state
 payButton.onmouseleave = () => {
@@ -162,19 +168,43 @@ cancelButton.style.fontWeight = 700;
 cancelButton.setAttribute('href', '#');
 cancelButton.style.textDecoration = 'none';
 cancelButton.innerText = 'Cancel Order';
+// changes the cancel button color when mouse is over
+cancelButton.addEventListener('mouseover', () => {
+    cancelButton.style.color = DarkBlue;
+    cancelButton.style.transition = 'color 0.5s';
+});
+// returns the default color to the cancel buton when the mouse is out
+cancelButton.addEventListener('mouseout', () => {
+    cancelButton.style.color = DesaturatedBlue;
+    cancelButton.style.transition = 'color 0.5s';
+});
 
-// DESKTOP RESOLUTION
+// FOOTER
+const footer = document.querySelector('footer');
+footer.style.position = 'absolute'; 
+footer.style.textAlign = 'center'; 
 
-const desktopRes = window.matchMedia('(min-width: 768px)');
-
-function mediaQuerie() {
-    if (desktopRes.matches) {
+// Media Queries
+function mediaQuerie(resolution) {
+    // DESKTOP RESOLUTION
+    if (resolution.matches) {
+        mainContainer.style.maxHeight = '120vh';
         h1.style.fontSize = '1.7rem';
+        footer.style.bottom = '-25px'; 
         body.style.backgroundImage = 'url(./images/pattern-background-desktop.svg)';
-        body.style.backgroundRepeat = 'no-repeat';
-        body.style.backgroundPositionY = '-70px'; //fullscreen value: 0
+        body.style.backgroundPositionY = '-70px';
+        body.style.height = '120vh' //fullscreen value: 0
+    }
+    // MOBILE RESOLUTION
+    else {
+        h1.style.fontSize = '1.45rem';
+        footer.style.bottom = '5px'; 
+        body.style.backgroundImage = 'url(./images/pattern-background-mobile.svg)';
+        body.style.backgroundPositionY= '0px';
+        body.style.height = '140vh'; 
     }
 }
 
+const desktopRes = window.matchMedia('(min-width: 768px)');
 mediaQuerie(desktopRes);
-desktopRes.addEventListener(mediaQuerie);
+desktopRes.addEventListener('change', mediaQuerie);
